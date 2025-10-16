@@ -6,27 +6,3 @@
 @media (max-width: 860px) { .edu { grid-template-columns: 1fr; } }
 .edu-item { padding: 16px; }
 .edu-item h3 { margin: 0 0 6px; }
-```
-
-Explanation: Achievements section
-````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/Achievements.jsx"
-import React from "react";
-import "./Achievements.css";
-import SectionWrapper from "./SectionWrapper";
-import SectionHeading from "./SectionHeading";
-import { achievements } from "../utils/content";
-
-// PUBLIC_INTERFACE
-export default function Achievements() {
-  /** Notable achievements */
-  return (
-    <SectionWrapper id="achievements">
-      <SectionHeading title="Achievements" />
-      <ul className="ach-list">
-        {achievements.map((a, i) => (
-          <li key={i} className="surface ach-item">{a}</li>
-        ))}
-      </ul>
-    </SectionWrapper>
-  );
-}

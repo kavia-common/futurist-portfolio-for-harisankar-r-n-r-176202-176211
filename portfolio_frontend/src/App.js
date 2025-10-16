@@ -1,47 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import "./App.css";
+
+// Sections and components
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Timeline from "./components/Timeline";
+import Projects from "./components/Projects";
+import SkillsCloud from "./components/SkillsCloud";
+import Education from "./components/Education";
+import Achievements from "./components/Achievements";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+
+// Section styles (ensure CSS is bundled)
+import "./components/Navbar.css";
+import "./components/Hero.css";
+import "./components/About.css";
+import "./components/Timeline.css";
+import "./components/Projects.css";
+import "./components/SkillsCloud.css";
+import "./components/Education.css";
+import "./components/Achievements.css";
+import "./components/Contact.css";
+import "./components/Footer.css";
+
+import { ANCHORS as NAV_ANCHORS } from "./router/anchors";
+import { useScrollSpy } from "./hooks/useScrollSpy";
+
+// Helper hook to persist and apply theme
+function useInitialTheme() {
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored) setTheme(stored);
+  }, []);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  return [theme, setTheme];
+}
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  /** Main SPA composition rendering all portfolio sections with scroll spy highlighting. */
+  const [theme, setTheme] = useInitialTheme();
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
-  // Effect to apply theme to document element
+  // Track active section for Navbar highlighting via scroll spy
+  const sectionIds = Object.values(NAV_ANCHORS);
+  const activeId = useScrollSpy(sectionIds);
+
+  // Optional: set document title
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+    document.title = "Harisankar R N R — Ocean Professional Portfolio";
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <a href={`#${NAV_ANCHORS.hero}`} className="skip-link">Skip to content</a>
+      <div className="bg-noise" aria-hidden="true" />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} activeId={activeId} />
+      <main className="main" id={NAV_ANCHORS.hero} tabIndex="-1">
+        {/* SectionWrapper internally sets id and container; components also manage their content */}
+        <Hero />
+        <About />
+        <Timeline />
+        <Projects />
+        <SkillsCloud />
+        <Education />
+        <Achievements />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }

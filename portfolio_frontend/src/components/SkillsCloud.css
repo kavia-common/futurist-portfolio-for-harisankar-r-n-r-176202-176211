@@ -9,31 +9,3 @@
 .skill-col { padding: 16px; }
 .skill-col .cat { margin: 0 0 8px; font-size: 16px; }
 .skill-col .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-```
-
-Explanation: Education section
-````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/Education.jsx"
-import React from "react";
-import "./Education.css";
-import SectionWrapper from "./SectionWrapper";
-import SectionHeading from "./SectionHeading";
-import { education } from "../utils/content";
-
-// PUBLIC_INTERFACE
-export default function Education() {
-  /** Education history */
-  return (
-    <SectionWrapper id="education">
-      <SectionHeading title="Education" />
-      <div className="edu">
-        {education.map((e, i) => (
-          <article key={i} className="surface edu-item">
-            <h3>{e.school}</h3>
-            <p className="p-muted">{e.degree} • {e.period}</p>
-            {e.details ? <p>{e.details}</p> : null}
-          </article>
-        ))}
-      </div>
-    </SectionWrapper>
-  );
-}

@@ -31,28 +31,3 @@
   font-size: 12px;
   color: var(--color-text-muted);
 }
-```
-
-Explanation: Experience timeline wrapper and item
-````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/Timeline.jsx"
-import React from "react";
-import "./Timeline.css";
-import SectionWrapper from "./SectionWrapper";
-import SectionHeading from "./SectionHeading";
-import { experience } from "../utils/content";
-import TimelineItem from "./TimelineItem";
-
-// PUBLIC_INTERFACE
-export default function Timeline() {
-  /** Experience section as a vertical timeline */
-  return (
-    <SectionWrapper id="experience">
-      <SectionHeading title="Experience" subtitle="Where I’ve worked" />
-      <div className="timeline">
-        {experience.map((e, idx) => (
-          <TimelineItem key={idx} {...e} />
-        ))}
-      </div>
-    </SectionWrapper>
-  );
-}
