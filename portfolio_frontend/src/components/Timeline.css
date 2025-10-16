@@ -1,0 +1,84 @@
+.timeline {
+  position: relative;
+  margin-left: 8px;
+  padding-left: 22px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(var(--color-primary), transparent);
+  opacity: .35;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 18px;
+  padding-left: 10px;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 8px;
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+}
+
+.timeline-card {
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-meta {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.timeline-meta .title {
+  font-weight: 600;
+}
+.timeline-meta .period {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.timeline-bullets {
+  margin: 8px 0 0 16px;
+}
+.timeline-bullets li { margin-bottom: 6px; }
+```
+
+Explanation: Timeline item component
+````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/TimelineItem.jsx"
+import React from "react";
+
+export default function TimelineItem({ company, title, period, description, bullets = [] }) {
+  return (
+    <article className="timeline-item">
+      <div className="timeline-card">
+        <div className="timeline-meta">
+          <span className="title">{title}</span>
+          <span>•</span>
+          <span>{company}</span>
+          <span className="period">{period}</span>
+        </div>
+        <p className="p-muted" style={{ marginTop: 6 }}>{description}</p>
+        {bullets?.length ? (
+          <ul className="timeline-bullets">
+            {bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        ) : null}
+      </div>
+    </article>
+  );
+}

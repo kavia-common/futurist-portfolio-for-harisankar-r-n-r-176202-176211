@@ -1,82 +1,53 @@
-# Lightweight React Template for KAVIA
+# Ocean Professional Portfolio - Harisankar R N R
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Single-page, responsive portfolio built with React and vanilla CSS. Ocean Professional palette with subtle animations, dark mode, scroll spy, and a contact form with multiple submission strategies.
 
-## Features
+## Quick start
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Node 16+ recommended
+- Install: `npm install`
+- Start: `npm start`
+- Test: `npm test`
+- Build: `npm run build`
 
-## Getting Started
+The app runs without any environment variables. The Contact section will display “Email not configured” when submission is attempted without configuration.
 
-In the project directory, you can run:
+## Environment variables
 
-### `npm start`
+Copy `.env.example` to `.env` and fill as needed:
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- REACT_APP_CONTACT_ENDPOINT: Optional HTTP endpoint to receive `{ name, email, message }` JSON
+- REACT_APP_EMAILJS_SERVICE_ID, REACT_APP_EMAILJS_TEMPLATE_ID, REACT_APP_EMAILJS_PUBLIC_KEY: EmailJS REST fallback
+- REACT_APP_ANALYTICS_ID: Optional analytics identifier (stub only)
 
-### `npm test`
+Priority:
+1) If CONTACT_ENDPOINT is set, it is used.
+2) Else if EmailJS variables are set, EmailJS REST is used.
+3) Else submission shows “Email not configured”.
 
-Launches the test runner in interactive watch mode.
+## Theme
 
-### `npm run build`
+Ocean Professional colors:
+- primary #2563EB, secondary/success #F59E0B, error #EF4444
+- text #111827, background #f9fafb, surface #ffffff
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+CSS variables are in `src/index.css`. Dark mode toggles via the navbar button storing preference in localStorage. Reduced motion is respected via `prefers-reduced-motion`.
 
-## Customization
+## Structure
 
-### Colors
+- src/components: Navbar, Hero, About, Timeline, Projects, SkillsCloud, Education, Achievements, Contact, Footer, and small UI pieces
+- src/hooks: useScrollSpy, useParallax, usePrefersReducedMotion
+- src/utils: content placeholders, validations, email strategies, analytics stub
+- src/router/anchors.js: Anchor constants and smooth scroll helper
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+## Accessibility
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+- Semantic sectioning and headings
+- Focus outlines, skip link, alt attributes, aria labels
+- Prefers-reduced-motion respected
 
-### Components
+## Notes
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- External links use `target=_blank` with `rel="noopener"`.
+- No heavy animation libraries; animations are CSS/IntersectionObserver based.
+- Replace content in `src/utils/content.js` and assets under `src/assets` with your own.

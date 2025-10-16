@@ -1,0 +1,44 @@
+.contact { padding: 16px; }
+.contact .grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+}
+@media (max-width: 720px) { .contact .grid { grid-template-columns: 1fr; } }
+
+label { display: grid; gap: 6px; }
+input, textarea {
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-surface);
+  outline: none;
+}
+input:focus-visible, textarea:focus-visible { box-shadow: var(--focus-ring); }
+
+.error { color: var(--color-error); font-size: 12px; }
+.success { color: var(--color-secondary); font-size: 12px; }
+
+.actions { margin-top: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+```
+
+Explanation: Footer with social links
+````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/Footer.jsx"
+import React from "react";
+import "./Footer.css";
+import SocialLinks from "./SocialLinks";
+import { ANCHORS } from "../router/anchors";
+
+// PUBLIC_INTERFACE
+export default function Footer() {
+  /** Footer with social links and copyright */
+  const year = new Date().getFullYear();
+  return (
+    <footer id={ANCHORS.footer} className="footer">
+      <div className="container footer-inner">
+        <SocialLinks />
+        <p className="p-muted" aria-label="Copyright">
+          © {year} Harisankar R N R. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+}

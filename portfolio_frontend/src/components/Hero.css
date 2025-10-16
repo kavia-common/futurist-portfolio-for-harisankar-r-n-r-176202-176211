@@ -1,0 +1,91 @@
+.hero {
+  position: relative;
+  padding-top: calc(var(--navbar-height) + 56px);
+  padding-bottom: 56px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 600px at 15% -10%, rgba(37,99,235,0.18), transparent 50%),
+              radial-gradient(800px 500px at 90% 10%, rgba(245,158,11,0.18), transparent 55%);
+  z-index: 0;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 24px 0 32px;
+}
+
+.overline {
+  letter-spacing: .2em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.roles { color: var(--color-text-muted); margin: 0 0 10px; height: 28px; }
+.role {
+  display: inline-block;
+  min-width: 160px;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.summary {
+  max-width: 720px;
+  color: var(--color-text-muted);
+}
+
+.cta-row { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+.social { margin-top: 22px; }
+```
+
+Explanation: About section with counters and highlight chips
+````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/About.jsx"
+import React from "react";
+import "./About.css";
+import SectionWrapper from "./SectionWrapper";
+import SectionHeading from "./SectionHeading";
+import Badge from "./Badge";
+import { highlights } from "../utils/content";
+
+// PUBLIC_INTERFACE
+export default function About() {
+  /** About section with highlight chips and counters */
+  return (
+    <SectionWrapper id="about">
+      <SectionHeading title="About" subtitle="Who I am and what I build" />
+      <div className="about-grid">
+        <div className="about-card surface">
+          <p>
+            I’m an engineer focused on shipping intelligent products. I love turning ideas into
+            reliable systems that operate in the wild — from ML pipelines to robotics stacks and
+            scalable backends.
+          </p>
+          <div className="chips">
+            {highlights.map((h, i) => (
+              <Badge key={i}>{h}</Badge>
+            ))}
+          </div>
+        </div>
+        <div className="about-stats surface" aria-label="Quick stats">
+          <div>
+            <span className="num">4+</span>
+            <span className="lbl">Years Experience</span>
+          </div>
+          <div>
+            <span className="num">20+</span>
+            <span className="lbl">Projects</span>
+          </div>
+          <div>
+            <span className="num">10+</span>
+            <span className="lbl">Articles & Talks</span>
+          </div>
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+}

@@ -1,0 +1,58 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+
+.about-card, .about-stats {
+  padding: 20px;
+}
+
+.chips { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+@media (max-width: 520px) { .about-stats { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+.about-stats .num {
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--color-primary);
+  display: block;
+}
+.about-stats .lbl {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+```
+
+Explanation: Experience timeline wrapper and item
+````write file="futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend/src/components/Timeline.jsx"
+import React from "react";
+import "./Timeline.css";
+import SectionWrapper from "./SectionWrapper";
+import SectionHeading from "./SectionHeading";
+import { experience } from "../utils/content";
+import TimelineItem from "./TimelineItem";
+
+// PUBLIC_INTERFACE
+export default function Timeline() {
+  /** Experience section as a vertical timeline */
+  return (
+    <SectionWrapper id="experience">
+      <SectionHeading title="Experience" subtitle="Where I’ve worked" />
+      <div className="timeline">
+        {experience.map((e, idx) => (
+          <TimelineItem key={idx} {...e} />
+        ))}
+      </div>
+    </SectionWrapper>
+  );
+}
