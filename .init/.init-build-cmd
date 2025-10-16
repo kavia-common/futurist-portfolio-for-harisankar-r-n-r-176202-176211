@@ -1,0 +1,4 @@
+{
+    "command": "npm install && npx tsc --noEmit && npm test -- --ci",
+    "working_directory": "/home/kavia/workspace/code-generation/futurist-portfolio-for-harisankar-r-n-r-176202-176211/portfolio_frontend"
+}
